@@ -1,0 +1,64 @@
+/* スマホ用スティック・ボタン */
+
+/* touch controls */
+#touch {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+  display: none
+}
+
+#touch.on {
+  display: block
+}
+
+#joy {
+  position: absolute;
+  left: 24px;
+  bottom: calc(34px + env(safe-area-inset-bottom, 0px));
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: rgba(10, 18, 32, .5);
+  border: 1px solid var(--line);
+  pointer-events: auto;
+  touch-action: none
+}
+
+#joynub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 54px;
+  height: 54px;
+  margin: -27px 0 0 -27px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(47, 230, 255, .9), rgba(47, 230, 255, .35));
+  box-shadow: 0 0 18px rgba(47, 230, 255, .5);
+  transition: background .1s
+}
+
+#tact {
+  position: absolute;
+  right: 26px;
+  bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: rgba(47, 230, 255, .12);
+  border: 1.5px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 13px;
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  box-shadow: 0 0 20px rgba(47, 230, 255, .25)
+}
+
+#tact:active {
+  background: rgba(47, 230, 255, .28)
+}

@@ -1,0 +1,197 @@
+/* 操作画面イメージ（疑似ブラウザ） */
+
+/* 操作内容を見せる、入力を伴わない画面イメージ */
+#screenPreview[hidden] {
+  display: none;
+}
+
+#dialogue.centerPopup:has(#screenPreview:not([hidden])) {
+  width: min(92vw, 680px);
+}
+
+.mockBrowser {
+  color: #26354b;
+  background: #f5f7fb;
+  border: 1px solid #becbdc;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+  text-align: left;
+}
+
+.mockChrome {
+  height: 27px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 12px;
+  background: #dce4ee;
+}
+
+.mockChrome i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7b8da7;
+}
+
+.mockChrome span {
+  margin-left: auto;
+  font-size: 10px;
+  color: #51637b;
+}
+
+.mockAddress {
+  padding: 7px 14px;
+  background: #eaf0f7;
+  border-bottom: 1px solid #d4deea;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.mockBody {
+  padding: 16px 20px;
+}
+
+.mockBrand {
+  color: #172d50;
+  font-weight: 800;
+  font-size: 15px;
+  border-bottom: 1px solid #d8e0eb;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.mockBody h3 {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.mockBody p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 8px 0 14px;
+}
+
+.mockField {
+  margin: 8px 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.mockField small {
+  display: block;
+  font-size: 10px;
+  color: #62718a;
+  margin-bottom: 4px;
+}
+
+.mockField div {
+  padding: 9px 10px;
+  background: white;
+  border: 1px solid #c4d0df;
+  border-radius: 5px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.mockColumns {
+  display: flex;
+  gap: 12px;
+}
+
+.mockAction {
+  margin: 10px 0 0;
+  background: #213f68;
+  border-radius: 5px;
+  padding: 10px 12px;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mockStatus {
+  color: #51647c;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.mockWarning {
+  color: #a32239;
+  background: #fff0f2;
+  border: 1px solid #e9a6b1;
+  border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.mockRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 10px;
+  border-bottom: 1px solid #dce4ee;
+  font-size: 12px;
+}
+
+.mockRow small {
+  color: #6b7c94;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.mockFocus {
+  background: #e1ebfa;
+  border-left: 3px solid #315d93;
+}
+
+.mockPath {
+  color: #6b7c94;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.mockZones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.mockZones span {
+  border: 1px solid #bccbde;
+  background: #fff;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.mockZones b {
+  font-size: 24px;
+  color: #b0344c;
+}
+
+@media(max-width:520px) {
+  .mockBody {
+    padding: 12px;
+  }
+
+  .mockColumns {
+    display: block;
+  }
+
+  .mockRow {
+    flex-wrap: wrap;
+  }
+
+  #dialogue.centerPopup:has(#screenPreview:not([hidden])) {
+    padding: 18px;
+  }
+}

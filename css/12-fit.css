@@ -1,0 +1,123 @@
+/* 一画面に収めるための縮小調整 */
+
+/* 全文・ボタンを一画面に収める。必要時のみパネル全体を等倍以下に調整。 */
+#dialogue.centerPopup,
+#dialogue.centerPopup.show {
+  max-height: none;
+  overflow: visible;
+  transform: translate(-50%, -50%) scale(var(--fit-scale, 1));
+}
+
+#dialogue.aiSpeech {
+  max-height: none;
+  overflow: visible;
+  transform: scale(var(--fit-scale, 1));
+  transform-origin: top left;
+}
+
+#remotePanel {
+  max-height: none;
+  overflow: visible;
+  transform: scale(var(--fit-scale, 1));
+  transform-origin: bottom left;
+}
+
+.screenContents {
+  width: 100%;
+  max-width: 960px;
+  flex-shrink: 0;
+  transform: scale(var(--fit-scale, 1));
+  transform-origin: center;
+}
+
+#debrief-body {
+  max-height: none;
+  overflow: visible;
+  margin-top: 14px;
+}
+
+#s-debrief h1 {
+  font-size: clamp(24px, 4vw, 42px);
+  line-height: 1.25;
+}
+
+#s-debrief .reveal-card {
+  padding: 12px 16px;
+  margin-bottom: 9px;
+}
+
+#s-debrief .lesson {
+  padding: 6px 0;
+}
+
+#dialogue.centerPopup .txt {
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 12px 0;
+}
+
+#dialogue.centerPopup {
+  padding: 20px 24px;
+}
+
+#dialogueTitle {
+  font-size: 22px;
+}
+
+.mockBody {
+  padding: 12px 16px;
+}
+
+.mockBrand {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.mockRow {
+  padding: 8px 10px;
+}
+
+@media(max-height:720px) {
+  #dialogue.centerPopup {
+    padding: 14px 20px;
+  }
+
+  #dialogue.centerPopup .txt {
+    margin: 8px 0;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  #dialogue.centerPopup .btns {
+    margin-top: 12px;
+  }
+
+  .mockBody {
+    padding: 10px 14px;
+  }
+
+  .mockChrome {
+    height: 20px;
+  }
+
+  .mockAddress {
+    padding: 5px 12px;
+  }
+
+  .mockAction,
+  .mockWarning {
+    padding: 8px 10px;
+  }
+
+  #s-debrief .reveal-card {
+    padding: 9px 14px;
+  }
+
+  #s-debrief .screenContents>div:last-child {
+    margin-top: 10px !important;
+  }
+
+  .screen .eyebrow {
+    margin-bottom: 9px;
+  }
+}

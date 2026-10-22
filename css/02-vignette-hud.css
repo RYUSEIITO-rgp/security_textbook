@@ -1,0 +1,146 @@
+/* 画面周辺の暗がり、左上の目標表示・右上ミニマップ（HUD） */
+
+/* ---------- vignette ---------- */
+#vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  box-shadow: inset 0 0 160px 40px rgba(0, 0, 0, .72), inset 0 0 40px 0 rgba(0, 0, 0, .4);
+  mix-blend-mode: multiply;
+}
+
+#scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: .07;
+  background: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 3px);
+}
+
+/* ---------- HUD ---------- */
+.hud {
+  position: fixed;
+  z-index: 10;
+  pointer-events: none
+}
+
+#hud-top {
+  top: calc(14px + env(safe-area-inset-top, 0px));
+  left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .5)
+}
+
+#objwrap {
+  padding: 12px 14px;
+  width: min(78vw, 280px)
+}
+
+#objwrap h3 {
+  margin: 0 0 8px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .14em;
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  gap: 7px
+}
+
+#objwrap h3 .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan)
+}
+
+.obj {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 12.5px;
+  line-height: 1.35;
+  padding: 4px 0;
+  color: var(--muted);
+  transition: color .3s
+}
+
+.obj .chk {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(140, 170, 200, .4);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  color: transparent;
+  transition: all .35s
+}
+
+.obj.done {
+  color: var(--text)
+}
+
+.obj.done .chk {
+  border-color: var(--green);
+  background: rgba(77, 255, 176, .12);
+  color: var(--green)
+}
+
+.obj.active {
+  color: var(--text)
+}
+
+.obj.active .chk {
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(47, 230, 255, .4)
+}
+
+#hud-right {
+  top: calc(14px + env(safe-area-inset-top, 0px));
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end
+}
+
+#minimap {
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative
+}
+
+#minimap canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%
+}
+
+#compass {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--cyan-dim);
+  padding: 5px 10px;
+  border-radius: 8px
+}

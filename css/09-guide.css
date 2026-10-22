@@ -1,0 +1,93 @@
+/* カフェの誘導表示、相棒の吹き出しの安定化 */
+
+/* Guided cafe flow and stable companion speech. */
+#objwrap {
+  width: 245px;
+  padding: 14px 16px
+}
+
+#objwrap h3 {
+  color: #80d8f1;
+  font-size: 11px;
+  margin: 0 0 10px;
+  letter-spacing: 1px
+}
+
+#nextAction {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.6
+}
+
+#collectedInfo {
+  display: block;
+  white-space: pre-line;
+  color: #a8c3d4;
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 8px
+}
+
+#collectedInfo:empty {
+  display: none
+}
+
+#dialogue.aiSpeech,
+#dialogue.aiSpeech.show {
+  transition: opacity .12s;
+  animation: none;
+  transform: none
+}
+
+#dialogue.centerPopup.failure {
+  border: 2px solid #ff7183;
+  background: linear-gradient(145deg, #301c2d, #101b2c);
+  box-shadow: 0 0 55px #ef586d30, 0 20px 70px #0007
+}
+
+#dialogue.failure #dialogueTitle {
+  color: #ffbcc4;
+  font-size: 25px
+}
+
+#dialogue.failure .spk {
+  font-size: 10px;
+  letter-spacing: 2px
+}
+
+#dialogue.failure .txt {
+  font-size: 16px
+}
+
+.remoteChoice {
+  padding: 13px 14px;
+  font-size: 14px
+}
+
+#remotePanel {
+  max-height: calc(100vh - 180px)
+}
+
+@media(max-width:560px) {
+  #objwrap {
+    width: 190px;
+    padding: 11px
+  }
+
+  #nextAction {
+    font-size: 12px
+  }
+
+  #collectedInfo {
+    font-size: 9px
+  }
+
+  .remoteChoice {
+    font-size: 11px;
+    padding: 10px
+  }
+
+  #dialogue.failure #dialogueTitle {
+    font-size: 20px
+  }
+}
