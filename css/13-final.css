@@ -1,0 +1,56 @@
+/* スタートボタン配置、タッチ時の表示切替、AIAアイコン、チュートリアル */
+
+/* スタートボタンと架空設定の注記を中央に縦並び。 */
+#s-briefContent #startBtn {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+#s-briefContent .fiction-note {
+  display: block;
+  margin: 16px auto 0;
+  text-align: center;
+}
+
+
+/* 読み進める間は操作スティックを隠し、画面内のボタンへ一本化する。 */
+.touchDevice.dialogueOpen #touch,
+.touchDevice.remoteSelecting #touch,
+.touchDevice.cinematicOpen #touch { display:none; }
+.touchDevice #prompt { bottom:calc(184px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 28px);white-space:normal;text-align:center;pointer-events:auto;font-size:12px;padding:10px 14px;cursor:pointer; }
+.touchDevice #prompt .keycap { flex-shrink:0; }
+.touchDevice #remotePanel { left:50%;top:50%;bottom:auto;width:min(86vw,360px);max-height:none;padding:18px;transform:translate(-50%,-50%) scale(var(--fit-scale,1));transform-origin:center;z-index:16; }
+.touchDevice #remotePanel .remoteChoice { font-size:14px;padding:13px 12px;min-height:46px; }
+.touchDevice .remoteHeading small { font-size:0; }
+.touchDevice .remoteHeading small::after { content:'接続先をタップして選ぶ';font-size:11px; }
+#aiaSpeaker { position:fixed;z-index:15;width:56px;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none; }
+#aiaSpeaker[hidden] { display:none; }
+#aiaSpeaker svg { width:56px;height:56px; }
+#aiaSpeaker b { color:#a9f4ff;font-size:11px;letter-spacing:.1em;text-shadow:0 1px 4px #000; }
+#blackout .blackoutContent { display:flex;flex-direction:column;align-items:center;gap:28px;padding:24px;max-width:100%;text-align:center; }
+#blackout .msg { line-height:1.8;overflow-wrap:anywhere; }
+#cinematicNext { display:none; }
+#blackout.show.msgon #cinematicNext { display:block; }
+#banner .inner { pointer-events:auto; }
+#bannerNext { margin:22px auto 0; }
+#tutorial[hidden] { display:none; }
+#tutorial { position:fixed;inset:0;z-index:50;overflow:hidden; }
+#tutorialFocus { position:absolute;border:2px solid #67e9ff;border-radius:12px;box-shadow:0 0 0 200vmax #020b18c7;pointer-events:none; }
+#tutorialCard { position:absolute;z-index:1;padding:18px 20px;background:#102536;border:1px solid #67e9ff;max-width:calc(100vw - 28px); }
+#tutorialCount { color:#73ddee;font-family:var(--mono); }
+#tutorialTitle { font-size:20px;margin:8px 0; }
+#tutorialText { font-size:14px;line-height:1.7;margin:0 0 16px; }
+#tutorialNext { display:block;margin-left:auto; }
+@media(max-height:500px) {
+ #tutorialCard { padding:10px 16px; }
+ #tutorialTitle { font-size:16px;margin:5px 0; }
+ #tutorialText { font-size:12px;margin-bottom:8px; }
+ #tutorialNext { padding:8px 14px; }
+ #blackout .blackoutContent { gap:16px; }
+ .touchDevice #joy { width:98px;height:98px;bottom:20px; }
+ .touchDevice #tact { width:72px;height:72px;bottom:32px; }
+ .touchDevice #prompt { bottom:132px; }
+}
+
+#dialogue.aiSpeech.show { transform:scale(var(--fit-scale,1)); }

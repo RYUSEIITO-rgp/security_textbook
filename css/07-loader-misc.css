@@ -1,0 +1,189 @@
+/* 読み込み画面、スクロールバー、細かな調整 */
+
+/* loading */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--bg);
+  display: grid;
+  place-items: center
+}
+
+#loader .l-in {
+  text-align: center
+}
+
+#loader .ring {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  margin: 0 auto 18px;
+  border: 3px solid rgba(47, 230, 255, .2);
+  border-top-color: var(--cyan);
+  animation: spin 1s linear infinite
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+#loader .lt {
+  font-family: var(--mono);
+  letter-spacing: .24em;
+  font-size: 12px;
+  color: var(--cyan-dim)
+}
+
+.hide {
+  display: none !important
+}
+
+::-webkit-scrollbar {
+  width: 8px
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 160, 200, .3);
+  border-radius: 4px
+}
+
+@media (max-width:560px) {
+  #objwrap {
+    width: min(66vw, 220px);
+    padding: 10px 11px
+  }
+
+  #minimap {
+    width: 112px;
+    height: 112px
+  }
+
+  .avatar {
+    width: 140px
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  * {
+    transition: none !important;
+    animation-duration: .01ms !important
+  }
+}
+
+#vignette {
+  box-shadow: inset 0 0 90px 12px #10374b20
+}
+
+#scanlines {
+  opacity: .025
+}
+
+.avatar.keySelected {
+  border-color: var(--cyan);
+  box-shadow: 0 0 24px #2fe6ff50;
+  transform: translateY(-4px)
+}
+
+#dbtns .keySelected {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px
+}
+
+#routebox {
+  padding: 12px 14px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px
+}
+
+#routebox small {
+  color: var(--cyan);
+  font-size: 9px;
+  letter-spacing: 1px
+}
+
+#routebox b {
+  font-size: 13px
+}
+
+#routebox span {
+  font-size: 11px;
+  color: #b9d2e7
+}
+
+#blackout .msg {
+  font-family: var(--jp);
+  letter-spacing: 1px;
+  font-size: 20px;
+  padding: 30px;
+  text-align: center;
+  line-height: 1.8
+}
+
+#hud-top {
+  max-width: 45vw
+}
+
+#prompt {
+  bottom: 110px
+}
+
+#objwrap {
+  background: #0a1626e8
+}
+
+@media(max-width:560px) {
+  #routebox {
+    width: 140px;
+    padding: 9px
+  }
+
+  #routebox b {
+    font-size: 10px
+  }
+
+  #routebox span {
+    font-size: 9px
+  }
+
+  .avatar {
+    width: 100px
+  }
+
+  .avatar .thumb {
+    height: 110px
+  }
+
+  .avatar canvas {
+    width: 105px;
+    height: 105px
+  }
+
+  .avatar .meta {
+    padding: 8px
+  }
+
+  .avatar .tag {
+    font-size: 9px
+  }
+
+  #avatars {
+    gap: 9px
+  }
+
+  .screen {
+    padding: 18px
+  }
+
+  .screen .sub {
+    font-size: 12px
+  }
+
+  #dialogue .txt {
+    font-size: 13px
+  }
+}

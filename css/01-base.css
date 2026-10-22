@@ -1,0 +1,51 @@
+/* 変数（色・フォント）、リセット、全体の土台 */
+
+/* 色・余白・吹き出し・ポップアップなど、見た目の設定 */
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #04060c;
+  --panel: rgba(10, 16, 28, .82);
+  --panel-solid: #0a1322;
+  --line: rgba(120, 180, 230, .22);
+  --cyan: #2fe6ff;
+  --cyan-dim: #7fb9d6;
+  --magenta: #ff3b82;
+  --amber: #ffc24b;
+  --green: #4dffb0;
+  --red: #ff5160;
+  --text: #dce8f5;
+  --muted: #8ba0b8;
+  --mono: "Chakra Petch", system-ui, sans-serif;
+  --jp: "Noto Sans JP", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--jp);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+canvas {
+  display: block
+}
+
+#app {
+  position: fixed;
+  inset: 0
+}

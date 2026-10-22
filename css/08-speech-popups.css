@@ -1,0 +1,410 @@
+/* AIの吹き出し、中央の結果ポップアップ（レイアウト改訂版） */
+
+/* Minimal HUD, AI speech bubbles, and large central result dialogs. */
+#vignette {
+  box-shadow: none
+}
+
+#hud-top {
+  top: 12px;
+  left: 12px
+}
+
+#objwrap {
+  width: 225px;
+  padding: 11px 12px;
+  border-radius: 9px
+}
+
+#objwrap h3 {
+  font-size: 10px;
+  margin-bottom: 5px
+}
+
+.obj {
+  font-size: 11px;
+  padding: 4px 0;
+  line-height: 1.4
+}
+
+#hud-right {
+  top: 12px;
+  right: 12px
+}
+
+#minimap {
+  width: 145px;
+  height: 145px
+}
+
+#compass,
+#routebox {
+  display: none !important
+}
+
+#dialogueShade {
+  position: fixed;
+  inset: 0;
+  background: #03101b80;
+  backdrop-filter: blur(4px);
+  z-index: 13;
+  display: none
+}
+
+#dialogueShade.show {
+  display: block
+}
+
+#speechTail {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 13;
+  display: none;
+  pointer-events: none;
+  overflow: visible
+}
+
+#speechTail.show {
+  display: block
+}
+
+#tailPolygon {
+  fill: #102d41;
+  stroke: #2fe6ff;
+  stroke-width: 1.2
+}
+
+#dialogue {
+  transition: opacity .15s
+}
+
+#dialogue.aiSpeech {
+  bottom: auto;
+  transform: none;
+  left: 50%;
+  top: 40%;
+  width: 330px;
+  background: #102d41;
+  border: 1px solid #2fe6ff;
+  border-radius: 15px;
+  padding: 15px 17px;
+  box-shadow: 0 9px 32px #09243c35
+}
+
+#dialogue.aiSpeech.show {
+  transform: none
+}
+
+#dialogue.aiSpeech .txt {
+  font-size: 14px;
+  line-height: 1.75
+}
+
+#dialogue.aiSpeech .btns {
+  margin-top: 12px
+}
+
+#dialogue.centerPopup {
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 570px);
+  max-height: 82vh;
+  overflow: auto;
+  padding: 28px 30px;
+  background: #0a192bef;
+  border-radius: 15px;
+  box-shadow: 0 22px 80px #0007
+}
+
+#dialogue.centerPopup.show {
+  transform: translate(-50%, -50%)
+}
+
+#dialogue.centerPopup .txt {
+  font-size: 18px;
+  line-height: 1.85;
+  margin: 18px 0 22px
+}
+
+#dialogue.centerPopup.failure {
+  border: 2px solid #ff6778
+}
+
+#dialogue.centerPopup.explanation {
+  border: 2px solid #5ec8ef
+}
+
+#dialogueTitle {
+  font-size: 26px;
+  line-height: 1.5;
+  margin: 8px 0 5px
+}
+
+#dialogueTitle:empty {
+  display: none
+}
+
+.spk-explain {
+  color: #75d6ff
+}
+
+#dialogue.centerPopup .btns {
+  margin-top: 18px
+}
+
+.aiSpeech #dialogueTitle {
+  display: none
+}
+
+#s-brief h1 {
+  font-family: var(--jp);
+  font-size: clamp(25px, 4.8vw, 49px);
+  line-height: 1.45
+}
+
+#s-brief .sub {
+  font-size: 15px;
+  line-height: 2;
+  margin-top: 23px
+}
+
+.brief-route {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 24px 0 10px;
+  color: #c2e5f7;
+  font-size: 13px
+}
+
+.brief-route span {
+  border-bottom: 1px solid #356477;
+  padding: 8px 10px
+}
+
+.brief-route i {
+  color: #63c6e6;
+  font-style: normal
+}
+
+.brief-controls {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 15px 0 23px
+}
+
+#startBtn {
+  font-size: 16px;
+  min-width: 245px;
+  padding: 14px 24px
+}
+
+.fiction-note {
+  font-size: 10px;
+  color: #7692a9;
+  line-height: 1.8;
+  margin-top: 20px
+}
+
+@media(max-width:560px) {
+  #objwrap {
+    width: 185px;
+    padding: 9px 10px
+  }
+
+  .obj {
+    font-size: 9px
+  }
+
+  #minimap {
+    width: 105px;
+    height: 105px
+  }
+
+  #dialogue.centerPopup {
+    padding: 22px 20px
+  }
+
+  #dialogue.centerPopup .txt {
+    font-size: 15px
+  }
+
+  #dialogueTitle {
+    font-size: 22px
+  }
+
+  #dialogue.aiSpeech .txt {
+    font-size: 12px
+  }
+
+  #s-brief .sub {
+    font-size: 12px
+  }
+
+  .brief-route {
+    gap: 7px;
+    font-size: 11px
+  }
+
+  .brief-route span {
+    padding: 7px
+  }
+
+  .brief-controls {
+    font-size: 10px
+  }
+}
+
+#remotePanel {
+  position: fixed;
+  left: 16px;
+  bottom: 18px;
+  width: min(330px, 40vw);
+  z-index: 12;
+  padding: 16px;
+  background: #071827f5;
+  border: 1px solid #63c5f5;
+  max-height: calc(100vh - 205px);
+  overflow: auto
+}
+
+#remotePanel[hidden] {
+  display: none
+}
+
+.remoteHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px
+}
+
+.remoteHeading span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--cyan)
+}
+
+.remoteHeading b {
+  font-size: 19px
+}
+
+.remoteHeading small {
+  font-size: 10px;
+  color: #9eb8ce
+}
+
+#remoteChoices {
+  display: grid;
+  gap: 6px
+}
+
+.remoteChoice {
+  padding: 10px 12px;
+  border: 1px solid #365165;
+  border-radius: 7px;
+  background: #102334;
+  color: #d6e7f7;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer
+}
+
+.remoteChoice.selected {
+  border-color: #6de1f5;
+  box-shadow: inset 3px 0 #6de1f5;
+  background: #153849
+}
+
+.remoteChoice.locked {
+  color: #8299ac
+}
+
+.remoteChoice.done {
+  color: #8acfb9
+}
+
+.remoteChoice small {
+  display: block;
+  font-size: 9px;
+  color: #94aec3;
+  margin-top: 4px
+}
+
+#remoteDetail {
+  border-top: 1px solid #2b495e;
+  padding-top: 10px;
+  margin-top: 12px
+}
+
+#remoteState {
+  color: #77daf4;
+  font-size: 10px
+}
+
+#remoteCondition {
+  font-size: 11px;
+  color: #c7d9e7;
+  line-height: 1.8;
+  margin: 6px 0 10px
+}
+
+#remoteExit {
+  font-size: 11px;
+  padding: 8px 12px;
+  width: 100%
+}
+
+#remoteExit.selected {
+  outline: 2px solid var(--cyan)
+}
+
+#dialogue.explanation .spk:before {
+  content: '✧';
+  font-size: 24px;
+  color: #2fe6ff
+}
+
+#dialogue.explanation {
+  border-radius: 18px;
+  background: #102d41f5
+}
+
+#dialogue.explanation .txt {
+  color: #e5f8fd
+}
+
+@media(max-width:650px) {
+  #remotePanel {
+    left: 10px;
+    bottom: 12px;
+    width: 45vw;
+    padding: 10px;
+    max-height: calc(100vh - 175px)
+  }
+
+  .remoteHeading b {
+    font-size: 15px
+  }
+
+  .remoteChoice {
+    font-size: 10px;
+    padding: 8px
+  }
+
+  .remoteChoice small {
+    font-size: 8px
+  }
+
+  #remoteCondition {
+    font-size: 10px
+  }
+
+  .remoteHeading small {
+    font-size: 8px
+  }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- 画面の文章やボタンはこのファイル、見た目は css/、動作は js/ を編集。構成は README.md を参照。 -->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>ZERO TRUST CITY — セキュリティ研修</title>
+<link rel="stylesheet" href="css/01-base.css">
+<link rel="stylesheet" href="css/02-vignette-hud.css">
+<link rel="stylesheet" href="css/03-prompt-dialogue.css">
+<link rel="stylesheet" href="css/04-screens.css">
+<link rel="stylesheet" href="css/05-effects.css">
+<link rel="stylesheet" href="css/06-touch.css">
+<link rel="stylesheet" href="css/07-loader-misc.css">
+<link rel="stylesheet" href="css/08-speech-popups.css">
+<link rel="stylesheet" href="css/09-guide.css">
+<link rel="stylesheet" href="css/10-remote.css">
+<link rel="stylesheet" href="css/11-screen-preview.css">
+<link rel="stylesheet" href="css/12-fit.css">
+<link rel="stylesheet" href="css/13-final.css">
+</head>
+<body>
+<div id="app"></div>
+<div id="vignette"></div>
+
+
+<!-- HUD -->
+<div id="hud-top" class="hud">
+  <div id="objwrap" class="panel"><h3>次のアクション</h3><div id="nextAction">カフェへ向かおう</div><small id="collectedInfo"></small></div>
+</div>
+<div id="hud-right" class="hud">
+  <div id="minimap" class="panel"><canvas id="mapcv" width="300" height="300"></canvas></div>
+  
+</div>
+
+<div id="prompt" class="panel">
+<span class="keycap" id="pk">Enter</span><span id="ptxt">調べる</span>
+</div>
+
+<!-- dialogue -->
+<div id="aiaSpeaker" hidden aria-label="話し手 AIA"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="#102d41" stroke="#2fe6ff" stroke-width="2"/><rect x="13" y="17" width="30" height="24" rx="9" fill="#163f56" stroke="#75eaff"/><circle cx="22" cy="28" r="3" fill="#75eaff"/><circle cx="34" cy="28" r="3" fill="#75eaff"/><path d="M28 17V10M23 35H33" stroke="#75eaff" stroke-width="2"/></svg><b>AIA</b></div>
+<div id="tutorial" hidden role="dialog" aria-modal="true" aria-label="操作ガイド"><div id="tutorialFocus"></div><div id="tutorialCard" class="panel"><small id="tutorialCount"></small><h2 id="tutorialTitle"></h2><p id="tutorialText"></p><button id="tutorialNext" class="btn primary">次へ</button></div></div>
+<div id="dialogueShade"></div>
+<svg id="speechTail" aria-hidden="true"><polygon id="tailPolygon"></polygon></svg><div id="dialogue" class="panel" role="dialog" aria-modal="true" aria-label="会話と結果">
+  <div class="spk" id="dspk">
+<span class="pip"></span><span id="dspkname">AIA</span>
+</div>
+  <h2 id="dialogueTitle"></h2>
+<div class="txt" id="dtxt"></div>
+<div id="screenPreview" role="img" aria-label="操作中の画面イメージ" hidden></div>
+  <div class="btns" id="dbtns"></div>
+</div>
+
+<section id="remotePanel" class="panel" aria-label="自宅PCの接続先" hidden>
+ <div class="remoteHeading">
+<span>HOME TERMINAL</span><b>接続先を選ぶ</b><small>↑ ↓ 選択 ／ Enter 実行</small>
+</div>
+ <div id="remoteChoices"></div>
+ <button id="remoteExit" class="btn">席を離れる</button>
+</section>
+<!-- chase -->
+<div id="chasebar">
+  <div class="lab">
+<span>⚠ 観測されている — 逃走せよ</span><span class="time" id="ctime">20.0</span>
+</div>
+  <div id="chasetrack"><div id="chasefill"></div></div>
+</div>
+
+<!-- touch -->
+<div id="touch">
+  <div id="joy"><div id="joynub"></div></div>
+  <div id="tact">調べる</div>
+</div>
+
+<!-- banners / fades -->
+<div id="banner"><div class="inner">
+<div class="big" id="bannerbig">MISSION COMPLETE</div>
+<div class="small" id="bannersmall">NEW PRODUCT DATA ACQUIRED</div><button id="bannerNext" class="btn primary">次へ　↵ Enter / タップ</button>
+</div></div>
+<div id="blackout"><div class="blackoutContent"><div class="msg" id="blackmsg">RE-ESTABLISHING LINK…</div><button id="cinematicNext" class="btn primary">次へ　↵ Enter / タップ</button></div></div>
+<div id="flash"></div>
+
+<!-- screens -->
+<div id="s-brief" class="screen">
+<div class="screenContents" id="s-briefContent">
+ <div class="eyebrow">ZERO TRUST CITY</div>
+ <h1>新製品の機密を手に入れろ。</h1>
+ <div class="sub">標的は「<b>株式会社KAKU</b>」の未発表製品。<br>カフェで手掛かりを集め、自宅PCから会社のシステムへ侵入せよ。<br>相棒AI「AIA」が同行する。</div>
+ <p class="brief-controls">十字キー：移動 ／ Enter：調べる・次へ</p>
+ <button class="btn primary" id="startBtn">スタート  ↵ Enter</button>
+ <small class="fiction-note">企業・人物・資料は、すべてゲーム内の架空設定。</small>
+</div>
+</div>
+
+<div id="s-debrief" class="screen">
+<div class="screenContents" id="s-debriefContent">
+  <div class="eyebrow">DEBRIEFING / 種明かし</div>
+  <h1 id="debriefTitle">これは、罠だった</h1>
+  <div id="debrief-body"></div>
+  <div style="margin-top:22px"><button class="btn primary" id="replayBtn">もう一度プレイする ↵ Enter</button></div>
+</div>
+</div>
+
+<!-- loader -->
+<div id="loader"><div class="l-in">
+<div class="ring"></div>
+<div class="lt">BOOTING ZERO TRUST CITY…</div>
+</div></div>
+
+<!-- 3Dエンジン → ゲーム本体の順に読み込む。順番を入れ替えないこと。 -->
+<script src="vendor/three.r160.js"></script>
+<script src="js/core/utils.js"></script>
+<script src="js/core/audio.js"></script>
+<script src="js/engine/three-setup.js"></script>
+<script src="js/world/city.js"></script>
+<script src="js/world/characters.js"></script>
+<script src="js/player/player.js"></script>
+<script src="js/player/collision.js"></script>
+<script src="js/systems/interact.js"></script>
+<script src="js/ui/dialogue.js"></script>
+<script src="js/scenario/scenarios.js"></script>
+<script src="js/scenario/climax.js"></script>
+<script src="js/ui/screens.js"></script>
+<script src="js/core/game-loop.js"></script>
+<script src="js/ui/minimap.js"></script>
+<script src="js/core/boot.js"></script>
+<script src="js/systems/guidance.js"></script>
+<script src="js/scenario/remote-pc.js"></script>
+<script src="js/ui/touch.js"></script>
+<script src="js/ui/tutorial.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
